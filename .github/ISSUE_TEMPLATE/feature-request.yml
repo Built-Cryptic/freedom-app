@@ -1,0 +1,25 @@
+name: Feature request
+description: Track a feature-sized delivery item
+title: "feat: "
+labels:
+  - feature
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the feature in one concise paragraph.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Provide bullet points for done criteria.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Add implementation notes, references, or constraints.
