@@ -150,7 +150,7 @@ function App() {
         <section className="overview-panel" id="overview">
           <div className="overview-panel__copy">
             <p className="eyebrow">Theater condition</p>
-            <h2>Axis-style industrial identity, DayNight-style control surface.</h2>
+            <h2>Plan, Execute, Analyze.</h2>
             <p className="overview-panel__text">
               Freedom Fleet is a fictional UAV fleet command product. This build keeps the dense,
               usable dashboard backbone of an admin interface while shifting the visual language into
