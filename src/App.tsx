@@ -59,6 +59,30 @@ function App() {
     'CI completed lint and build validation in 54 seconds.',
   ]
 
+  const milestones = [
+    { name: 'Content review', progress: 100, owner: 'Product' },
+    { name: 'Edge-case QA sweep', progress: 72, owner: 'QA' },
+    { name: 'Operations sign-off', progress: 58, owner: 'Operations' },
+  ]
+
+  const releaseRisks = [
+    {
+      title: 'Automation upgrade plan needs stakeholder approval',
+      severity: 'High',
+      note: 'Rules-engine migration is still waiting on final review.',
+    },
+    {
+      title: 'Dashboard edge-case validation is still in progress',
+      severity: 'Medium',
+      note: 'QA has one browser pass and one accessibility pass remaining.',
+    },
+    {
+      title: 'Production announcement copy needs final scheduling',
+      severity: 'Low',
+      note: 'Comms draft is approved, but publish timing is not locked.',
+    },
+  ]
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
@@ -215,6 +239,67 @@ function App() {
               <label><input type="checkbox" checked readOnly /> CI validation passing</label>
               <label><input type="checkbox" checked readOnly /> Deploy pipeline configured</label>
               <label><input type="checkbox" readOnly /> GitHub issues and PRs published</label>
+            </div>
+          </article>
+        </section>
+
+        <section className="content-grid">
+          <article className="card" id="readiness">
+            <div className="card__heading">
+              <div>
+                <p className="eyebrow">Launch readiness</p>
+                <h3>Milestone progress</h3>
+              </div>
+              <span className="badge">Release week</span>
+            </div>
+            <div className="milestone-list">
+              {milestones.map((milestone) => (
+                <div className="milestone-row" key={milestone.name}>
+                  <div className="milestone-row__header">
+                    <div>
+                      <h4>{milestone.name}</h4>
+                      <p>{milestone.owner}</p>
+                    </div>
+                    <strong>{milestone.progress}%</strong>
+                  </div>
+                  <div
+                    className="progress-bar"
+                    aria-label={`${milestone.name} progress ${milestone.progress}%`}
+                  >
+                    <span style={{ width: `${milestone.progress}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className="card">
+            <div className="card__heading">
+              <div>
+                <p className="eyebrow">Risk register</p>
+                <h3>Release blockers and watch items</h3>
+              </div>
+            </div>
+            <div className="risk-list">
+              {releaseRisks.map((risk) => (
+                <div className="risk-row" key={risk.title}>
+                  <div className="risk-row__header">
+                    <h4>{risk.title}</h4>
+                    <span
+                      className={
+                        risk.severity === 'High'
+                          ? 'status-pill status-pill--high'
+                          : risk.severity === 'Medium'
+                            ? 'status-pill status-pill--medium'
+                            : 'status-pill status-pill--low'
+                      }
+                    >
+                      {risk.severity}
+                    </span>
+                  </div>
+                  <p>{risk.note}</p>
+                </div>
+              ))}
             </div>
           </article>
         </section>
