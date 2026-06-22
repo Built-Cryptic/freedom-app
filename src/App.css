@@ -257,6 +257,68 @@
   line-height: 1.7;
 }
 
+.milestone-list,
+.risk-list {
+  display: grid;
+  gap: 16px;
+}
+
+.milestone-row,
+.risk-row {
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.milestone-row__header,
+.risk-row__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.milestone-row__header h4,
+.risk-row__header h4 {
+  margin: 0;
+}
+
+.milestone-row__header p,
+.risk-row p {
+  margin: 6px 0 0;
+  color: #a6b4c6;
+}
+
+.progress-bar {
+  height: 10px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7fe8c8, #4fb7ff);
+}
+
+.status-pill--high {
+  background: rgba(255, 107, 107, 0.16);
+  color: #ff9d9d;
+}
+
+.status-pill--medium {
+  background: rgba(255, 194, 102, 0.16);
+  color: #ffd48f;
+}
+
+.status-pill--low {
+  background: rgba(127, 232, 200, 0.14);
+  color: #8df0d3;
+}
+
 .checklist label {
   display: flex;
   align-items: center;
@@ -302,7 +364,9 @@
   .hero-panel,
   .workflow-row,
   .task-row,
-  .card__heading {
+  .card__heading,
+  .milestone-row__header,
+  .risk-row__header {
     display: grid;
   }
 
