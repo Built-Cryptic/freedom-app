@@ -30,7 +30,7 @@ frontend-only so the public GitHub history can focus on:
 
 ## Live URL
 
-`https://freedom-app.vercel.app`
+`https://freedom-app-bay.vercel.app`
 
 ## Local commands
 
