@@ -76,10 +76,30 @@ function App() {
     { craft: 'Specter-02', condition: 'Standby', battery: '92%', uplink: 'Strong' },
   ]
 
+  const fleetOverview = [
+    { label: '18Z', active: 78, grounded: 34 },
+    { label: '19Z', active: 92, grounded: 30 },
+    { label: '20Z', active: 88, grounded: 36 },
+    { label: '21Z', active: 110, grounded: 28 },
+    { label: '22Z', active: 104, grounded: 32 },
+    { label: '23Z', active: 118, grounded: 26 },
+  ]
+
   const readinessTracks = [
     { name: 'Launch package validation', progress: 100, owner: 'Command' },
     { name: 'Battery and payload rotation', progress: 76, owner: 'Ground Crew' },
     { name: 'Night corridor clearance', progress: 61, owner: 'Airspace Desk' },
+  ]
+
+  const readinessTrendPoints = '10,130 80,118 150,96 220,82 290,70 360,54'
+  const readinessTrendFill = '10,130 80,118 150,96 220,82 290,70 360,54 360,160 10,160'
+  const readinessTrend = [
+    { label: '18Z', value: '71%' },
+    { label: '19Z', value: '74%' },
+    { label: '20Z', value: '79%' },
+    { label: '21Z', value: '83%' },
+    { label: '22Z', value: '86%' },
+    { label: '23Z', value: '89%' },
   ]
 
   const missionRisks = [
@@ -282,6 +302,57 @@ function App() {
                   <span className="panel__badge">Night watch</span>
                 </div>
 
+                <div className="mini-chart-card">
+                  <div className="mini-chart-card__header">
+                    <div>
+                      <h4>Readiness trend</h4>
+                      <p>Mission-capable launch posture across the current watch.</p>
+                    </div>
+                    <strong>89%</strong>
+                  </div>
+
+                  <div className="line-chart">
+                    <svg
+                      className="line-chart__svg"
+                      viewBox="0 0 370 170"
+                      aria-label="Fleet readiness trend"
+                    >
+                      <defs>
+                        <linearGradient id="readinessGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="rgba(255, 62, 0, 0.42)" />
+                          <stop offset="100%" stopColor="rgba(255, 62, 0, 0)" />
+                        </linearGradient>
+                      </defs>
+                      <polyline className="line-chart__fill" points={readinessTrendFill} />
+                      <polyline className="line-chart__path" points={readinessTrendPoints} />
+                      {[
+                        { x: 10, y: 130 },
+                        { x: 80, y: 118 },
+                        { x: 150, y: 96 },
+                        { x: 220, y: 82 },
+                        { x: 290, y: 70 },
+                        { x: 360, y: 54 },
+                      ].map((point) => (
+                        <circle
+                          key={`${point.x}-${point.y}`}
+                          className="line-chart__dot"
+                          cx={point.x}
+                          cy={point.y}
+                          r="4"
+                        />
+                      ))}
+                    </svg>
+                    <div className="line-chart__labels">
+                      {readinessTrend.map((point) => (
+                        <div key={point.label}>
+                          <span>{point.label}</span>
+                          <strong>{point.value}</strong>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
                 <div className="readiness-list">
                   {readinessTracks.map((track) => (
                     <div className="readiness-row" key={track.name}>
@@ -361,6 +432,57 @@ function App() {
                 <div>
                   <p className="eyebrow">Fleet board</p>
                   <h3>Craft status</h3>
+                </div>
+              </div>
+
+              <div className="chart-card">
+                <div className="chart-card__header">
+                  <div>
+                    <h4>Fleet operations overview</h4>
+                    <p>Mission-capable aircraft compared with grounded craft by hour.</p>
+                  </div>
+                  <div className="chart-card__badge">Last 6 hours</div>
+                </div>
+
+                <div className="bar-chart">
+                  <div className="bar-chart__axis">
+                    <span>120</span>
+                    <span>90</span>
+                    <span>60</span>
+                    <span>30</span>
+                    <span>0</span>
+                  </div>
+                  <div className="bar-chart__grid">
+                    {[0, 1, 2, 3, 4].map((line) => (
+                      <div className="bar-chart__line" key={line} />
+                    ))}
+                  </div>
+                  {fleetOverview.map((entry) => (
+                    <div className="bar-chart__group" key={entry.label}>
+                      <div className="bar-chart__bars">
+                        <div
+                          className="bar-chart__bar bar-chart__bar--active"
+                          style={{ height: `${entry.active}px` }}
+                        />
+                        <div
+                          className="bar-chart__bar bar-chart__bar--grounded"
+                          style={{ height: `${entry.grounded}px` }}
+                        />
+                      </div>
+                      <span className="bar-chart__label">{entry.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="chart-legend">
+                  <div className="chart-legend__item">
+                    <span className="chart-legend__dot chart-legend__dot--active" />
+                    Mission-capable
+                  </div>
+                  <div className="chart-legend__item">
+                    <span className="chart-legend__dot chart-legend__dot--grounded" />
+                    Grounded
+                  </div>
                 </div>
               </div>
 
