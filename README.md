@@ -1,6 +1,6 @@
-# Freedom App
+# Freedom Fleet App
 
-Frontend-only SaaS demo application for the Freedom SDLC showcase.
+Frontend-only UAV fleet command dashboard for the Freedom Fleet SDLC showcase.
 
 Showcase site: `https://built-cryptic.github.io/freedom-showcase/`
 
@@ -23,6 +23,9 @@ frontend-only so the public GitHub history can focus on:
 - pull request hygiene
 - CI validation
 - cloud deployment automation
+
+The product concept is a fictional command-center SaaS for monitoring aircraft status, mission readiness,
+operator tasking, telemetry, and operational risk across a drone and UAV fleet.
 
 ## Repository URL
 
