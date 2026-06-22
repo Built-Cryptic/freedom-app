@@ -171,6 +171,59 @@
   gap: 14px;
 }
 
+.workflow-summary,
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.summary-chip,
+.filter-chip {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.summary-chip {
+  display: grid;
+  gap: 4px;
+  min-width: 120px;
+  padding: 14px 16px;
+}
+
+.summary-chip span {
+  color: #a6b4c6;
+  font-size: 0.82rem;
+}
+
+.summary-chip strong {
+  font-size: 1.35rem;
+}
+
+.filter-chip {
+  padding: 10px 14px;
+  color: #dce4ee;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.filter-chip:hover,
+.filter-chip:focus-visible {
+  border-color: rgba(127, 232, 200, 0.34);
+  transform: translateY(-1px);
+}
+
+.filter-chip--active {
+  background: rgba(127, 232, 200, 0.14);
+  border-color: rgba(127, 232, 200, 0.34);
+  color: #8df0d3;
+}
+
 .workflow-row,
 .task-row {
   display: flex;
@@ -208,6 +261,22 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.empty-state {
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.empty-state h4,
+.empty-state p {
+  margin: 0;
+}
+
+.empty-state p {
+  margin-top: 8px;
+  color: #a6b4c6;
 }
 
 @media (max-width: 1040px) {

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './App.css'
 
 function App() {
@@ -30,6 +31,19 @@ function App() {
       coverage: 'Rules engine migration',
     },
   ]
+
+  const workflowStatuses = ['All', 'In review', 'On track', 'Needs input'] as const
+  const [statusFilter, setStatusFilter] = useState<(typeof workflowStatuses)[number]>('All')
+
+  const visibleWorkflows =
+    statusFilter === 'All'
+      ? workflows
+      : workflows.filter((workflow) => workflow.status === statusFilter)
+
+  const workflowSummary = workflowStatuses.slice(1).map((status) => ({
+    label: status,
+    count: workflows.filter((workflow) => workflow.status === status).length,
+  }))
 
   const tasks = [
     { title: 'Approve release checklist', tag: 'Release', state: 'Ready' },
@@ -100,8 +114,28 @@ function App() {
               </div>
               <span className="badge">Sprint 04</span>
             </div>
+            <div className="workflow-summary" aria-label="Workflow status summary">
+              {workflowSummary.map((item) => (
+                <article className="summary-chip" key={item.label}>
+                  <span>{item.label}</span>
+                  <strong>{item.count}</strong>
+                </article>
+              ))}
+            </div>
+            <div className="filter-row" aria-label="Filter workflows by status">
+              {workflowStatuses.map((status) => (
+                <button
+                  type="button"
+                  key={status}
+                  className={status === statusFilter ? 'filter-chip filter-chip--active' : 'filter-chip'}
+                  onClick={() => setStatusFilter(status)}
+                >
+                  {status}
+                </button>
+              ))}
+            </div>
             <div className="workflow-list">
-              {workflows.map((workflow) => (
+              {visibleWorkflows.map((workflow) => (
                 <div className="workflow-row" key={workflow.name}>
                   <div>
                     <h4>{workflow.name}</h4>
@@ -123,6 +157,12 @@ function App() {
                   </dl>
                 </div>
               ))}
+              {visibleWorkflows.length === 0 ? (
+                <div className="empty-state">
+                  <h4>No workflows match this filter</h4>
+                  <p>Try a broader status view to review the full delivery pipeline.</p>
+                </div>
+              ) : null}
             </div>
           </article>
 
