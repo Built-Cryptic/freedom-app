@@ -2,6 +2,8 @@
 
 Frontend-only SaaS demo application for the Freedom SDLC showcase.
 
+Showcase site: `https://built-cryptic.github.io/freedom-showcase/`
+
 ## Stack
 
 - React
@@ -22,11 +24,11 @@ frontend-only so the public GitHub history can focus on:
 - CI validation
 - cloud deployment automation
 
-## Suggested repo URL
+## Repository URL
 
 `https://github.com/Built-Cryptic/freedom-app`
 
-## Suggested live URL
+## Live URL
 
 `https://freedom-app.vercel.app`
 
@@ -51,7 +53,8 @@ npm run build
 
 ## Deployment notes
 
-The Vercel workflow expects these GitHub repository secrets:
+The production deployment path is wired through GitHub Actions and Vercel. The repo expects these GitHub
+repository secrets:
 
 - `VERCEL_TOKEN`
 - `VERCEL_ORG_ID`
