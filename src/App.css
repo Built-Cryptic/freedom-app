@@ -1,243 +1,298 @@
 .app-shell {
-  display: grid;
-  grid-template-columns: 290px minmax(0, 1fr);
   min-height: 100vh;
 }
 
-.sidebar {
-  position: relative;
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  padding: 34px 24px;
-  background:
-    linear-gradient(180deg, rgba(18, 24, 18, 0.96), rgba(11, 15, 11, 0.98)),
-    repeating-linear-gradient(
-      180deg,
-      rgba(187, 198, 126, 0.04),
-      rgba(187, 198, 126, 0.04) 1px,
-      transparent 1px,
-      transparent 28px
-    );
-  border-right: 1px solid rgba(181, 192, 120, 0.18);
+  gap: 24px;
+  padding: 16px 24px;
+  background: rgba(10, 10, 10, 0.94);
+  border-bottom: 2px solid #ff3e00;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(10px);
 }
 
-.sidebar::after {
-  content: '';
-  position: absolute;
-  inset: 16px 12px;
-  border: 1px solid rgba(181, 192, 120, 0.08);
-  pointer-events: none;
+.topbar__brand,
+.topbar__status,
+.topbar__nav {
+  display: flex;
+  align-items: center;
 }
 
-.sidebar h1,
-.hero-panel h2,
-.card h3,
-.workflow-row h4,
-.task-row h4,
-.milestone-row__header h4,
-.risk-row__header h4,
-.empty-state h4 {
-  margin: 0;
-  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
-  letter-spacing: 0.03em;
+.topbar__brand {
+  gap: 14px;
 }
 
-.sidebar__eyebrow,
-.eyebrow {
-  margin: 0 0 10px;
-  color: #b7c879;
-  font-size: 0.78rem;
+.topbar__logo {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid #ff3e00;
+  background: #161616;
+  color: #f6f3ea;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.08em;
+}
+
+.topbar__eyebrow,
+.eyebrow,
+.metric-card__label,
+.mission-row dt,
+.summary-card span,
+.panel__badge,
+.alert-card__header span,
+.fleet-row__meta span,
+.status-chip,
+.user-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.sidebar__nav {
+.topbar__brand h1,
+.overview-panel h2,
+.panel h3,
+.mission-row h4,
+.task-row h4,
+.readiness-row h4,
+.risk-row h4,
+.alert-card h4,
+.fleet-row h4 {
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.topbar__eyebrow,
+.eyebrow {
+  margin: 0 0 6px;
+  color: #ff7a4d;
+}
+
+.topbar__brand h1 {
+  color: #f5f5f0;
+  font-size: 1.65rem;
+  line-height: 0.95;
+}
+
+.topbar__nav {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topbar__nav a {
+  padding: 10px 12px;
+  color: #b0b0ab;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.topbar__nav a:hover,
+.topbar__nav a:focus-visible {
+  color: #f5f5f0;
+  background: rgba(255, 62, 0, 0.12);
+  border-color: rgba(255, 62, 0, 0.35);
+}
+
+.topbar__status {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.status-chip,
+.user-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: #171717;
+  color: #dbdbd5;
+}
+
+.status-chip--live {
+  border-color: rgba(255, 62, 0, 0.42);
+  background: rgba(255, 62, 0, 0.14);
+  color: #ff9a79;
+}
+
+.dashboard {
+  padding: 24px;
+}
+
+.overview-panel,
+.panel,
+.metric-card,
+.summary-card {
+  border: 1px solid #202020;
+  background: linear-gradient(180deg, rgba(16, 16, 16, 0.98), rgba(20, 20, 20, 0.96));
+  box-shadow: 8px 8px 0 #000000;
+}
+
+.overview-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+  gap: 24px;
+  padding: 28px;
+}
+
+.overview-panel h2 {
+  max-width: 12ch;
+  font-size: clamp(2.5rem, 4vw, 4.8rem);
+  line-height: 0.88;
+  color: #f5f5f0;
+}
+
+.overview-panel__text,
+.metric-card p,
+.mission-row p,
+.task-row p,
+.telemetry-list,
+.readiness-row p,
+.risk-row p,
+.alert-card p,
+.fleet-row p,
+.empty-state p,
+.checklist label {
+  color: #9d9d98;
+}
+
+.overview-panel__text {
+  max-width: 68ch;
+  line-height: 1.75;
+}
+
+.overview-panel__meta {
   display: grid;
   gap: 12px;
 }
 
-.sidebar__nav a,
-.sidebar__foot span,
-.hero-panel__text,
-.metric-card p,
-.metric-card span,
-.workflow-row p,
-.workflow-row dt,
-.task-row p,
-.activity-list,
-.checklist label,
-.summary-chip span,
-.milestone-row__header p,
-.risk-row p,
-.empty-state p {
-  color: #8f9983;
-}
-
-.sidebar__nav a {
-  padding: 13px 14px;
-  border: 1px solid rgba(181, 192, 120, 0.12);
-  border-radius: 8px;
-  background: rgba(181, 192, 120, 0.04);
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-}
-
-.sidebar__foot {
-  display: grid;
-  gap: 6px;
-}
-
-.dashboard {
-  padding: 28px;
-}
-
-.hero-panel,
-.card {
-  position: relative;
-  border: 1px solid rgba(181, 192, 120, 0.16);
-  border-radius: 20px;
-  background:
-    linear-gradient(180deg, rgba(16, 20, 14, 0.96), rgba(18, 24, 18, 0.86)),
-    repeating-linear-gradient(
-      90deg,
-      rgba(181, 192, 120, 0.03),
-      rgba(181, 192, 120, 0.03) 1px,
-      transparent 1px,
-      transparent 26px
-    );
-  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-}
-
-.hero-panel::before,
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 12px;
-  border: 1px solid rgba(181, 192, 120, 0.06);
-  clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
-  pointer-events: none;
-}
-
-.hero-panel {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 34px;
-  background:
-    radial-gradient(circle at top right, rgba(191, 178, 70, 0.16), transparent 26%),
-    linear-gradient(180deg, rgba(19, 27, 17, 0.98), rgba(15, 19, 13, 0.94));
-}
-
-.hero-panel h2 {
-  max-width: 13ch;
-  font-size: clamp(2.3rem, 4vw, 4.2rem);
-  line-height: 0.94;
-  text-transform: uppercase;
-}
-
-.hero-panel__text {
-  max-width: 66ch;
-  line-height: 1.7;
-}
-
-.hero-panel__meta {
-  display: grid;
-  gap: 6px;
-  min-width: 162px;
+.overview-panel__meta article {
   padding: 18px;
-  border: 1px solid rgba(191, 178, 70, 0.2);
-  border-radius: 12px;
-  background: rgba(191, 178, 70, 0.06);
-  text-align: right;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #131313;
+}
+
+.overview-panel__meta span {
+  display: block;
+  margin-bottom: 8px;
+  color: #ff7a4d;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.hero-panel__meta strong,
+.overview-panel__meta strong,
 .metric-card strong,
-.summary-chip strong {
-  color: #e7d77a;
+.summary-card strong,
+.readiness-row strong {
+  color: #f5f5f0;
+  font-family: 'Rajdhani', sans-serif;
 }
 
-.hero-panel__meta strong,
-.metric-card strong {
-  font-size: 1.7rem;
-  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+.overview-panel__meta strong {
+  font-size: 1.9rem;
 }
 
-.metrics,
-.content-grid {
+.metrics-grid,
+.main-grid,
+.split-grid {
   display: grid;
   gap: 18px;
   margin-top: 18px;
 }
 
-.metrics {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.metrics-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.content-grid {
-  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.92fr);
+.metric-card {
+  padding: 18px;
 }
 
-.content-grid--secondary {
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.82fr);
+.metric-card__label {
+  display: block;
+  color: #ff7a4d;
+  margin-bottom: 12px;
 }
 
-.card {
-  padding: 24px;
+.metric-card strong {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
-.card__heading {
+.main-grid {
+  grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.82fr);
+}
+
+.main-grid__primary,
+.main-grid__aside {
+  display: grid;
+  gap: 18px;
+}
+
+.split-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0;
+}
+
+.panel {
+  padding: 22px;
+}
+
+.panel__header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
-.badge,
+.panel h3 {
+  color: #f5f5f0;
+  font-size: 1.65rem;
+}
+
+.panel__badge,
 .status-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 32px;
   padding: 0 12px;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.09);
 }
 
-.badge {
-  background: rgba(183, 200, 121, 0.14);
-  border: 1px solid rgba(183, 200, 121, 0.18);
-  color: #d6dd9d;
+.panel__badge {
+  color: #ffb199;
+  background: rgba(255, 62, 0, 0.1);
 }
 
-.badge--soft,
+.panel__badge--soft,
 .status-pill {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #d7ddca;
+  color: #dbdbd5;
+  background: #161616;
 }
 
-.workflow-list,
-.task-list,
-.activity-list,
-.checklist,
-.milestone-list,
-.risk-list {
-  display: grid;
-  gap: 14px;
-}
-
-.workflow-summary,
+.summary-row,
 .filter-row {
   display: flex;
   flex-wrap: wrap;
@@ -245,62 +300,71 @@
   margin-bottom: 18px;
 }
 
-.summary-chip,
-.filter-chip,
-.workflow-row,
-.task-row,
-.milestone-row,
-.risk-row,
-.metric-card,
-.empty-state {
-  border: 1px solid rgba(181, 192, 120, 0.12);
-  border-radius: 12px;
-  background: rgba(181, 192, 120, 0.04);
+.summary-card {
+  min-width: 118px;
+  padding: 14px 16px;
 }
 
-.metric-card,
-.summary-chip,
-.milestone-row,
-.risk-row,
-.empty-state {
-  padding: 18px;
+.summary-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: #ff7a4d;
 }
 
-.summary-chip {
-  display: grid;
-  gap: 4px;
-  min-width: 120px;
-}
-
-.summary-chip strong {
-  font-size: 1.45rem;
-  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+.summary-card strong {
+  font-size: 1.5rem;
 }
 
 .filter-chip {
   padding: 10px 14px;
-  color: #d7ddca;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: #151515;
+  color: #cecec7;
   cursor: pointer;
   transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    transform 0.2s ease;
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
 }
 
 .filter-chip:hover,
 .filter-chip:focus-visible {
-  border-color: rgba(231, 215, 122, 0.36);
-  transform: translateY(-1px);
+  border-color: rgba(255, 62, 0, 0.34);
+  color: #f5f5f0;
 }
 
 .filter-chip--active {
-  background: rgba(231, 215, 122, 0.12);
-  border-color: rgba(231, 215, 122, 0.3);
-  color: #e7d77a;
+  border-color: #ff3e00;
+  background: #ff3e00;
+  color: #ffffff;
 }
 
-.workflow-row,
-.task-row {
+.mission-list,
+.task-list,
+.telemetry-list,
+.readiness-list,
+.risk-list,
+.alert-list,
+.fleet-list,
+.checklist {
+  display: grid;
+  gap: 14px;
+}
+
+.mission-row,
+.task-row,
+.readiness-row,
+.risk-row,
+.alert-card,
+.fleet-row,
+.empty-state {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #121212;
+}
+
+.mission-row,
+.task-row,
+.fleet-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -308,68 +372,141 @@
   padding: 16px;
 }
 
-.workflow-row dl {
+.mission-row__main,
+.mission-row__stats,
+.mission-row__title,
+.fleet-row__meta {
   display: grid;
-  grid-template-columns: repeat(3, minmax(82px, 1fr));
+}
+
+.mission-row__title {
+  grid-template-columns: auto auto;
+  align-items: baseline;
+  justify-content: start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.mission-row__title h4,
+.task-row h4,
+.readiness-row h4,
+.risk-row h4,
+.alert-card h4,
+.fleet-row h4 {
+  color: #f5f5f0;
+  font-size: 1.1rem;
+}
+
+.mission-row__title span {
+  color: #ff7a4d;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mission-row__stats {
+  grid-template-columns: repeat(3, minmax(84px, 1fr));
   gap: 12px;
+  min-width: 250px;
   margin: 0;
 }
 
-.workflow-row dt,
-.workflow-row dd {
+.mission-row dt,
+.mission-row dd {
   margin: 0;
 }
 
-.activity-list {
+.mission-row dt {
+  color: #70706b;
+  margin-bottom: 6px;
+}
+
+.mission-row dd {
+  color: #f3f3ee;
+}
+
+.telemetry-list {
   margin: 0;
   padding-left: 18px;
   line-height: 1.8;
 }
 
-.milestone-row__header,
-.risk-row__header {
+.readiness-row,
+.risk-row,
+.alert-card,
+.empty-state {
+  padding: 16px;
+}
+
+.readiness-row__header,
+.risk-row__header,
+.alert-card__header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
 }
 
-.milestone-row__header p,
+.readiness-row__header p,
 .risk-row p {
   margin: 6px 0 0;
 }
 
+.readiness-row strong {
+  font-size: 1.6rem;
+}
+
 .progress-bar {
   height: 10px;
-  margin-top: 16px;
+  margin-top: 14px;
+  background: #222222;
   overflow: hidden;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
 }
 
 .progress-bar span {
   display: block;
   height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #c6bf68, #6a7f48);
+  background: linear-gradient(90deg, #ff3e00, #ff8b5f);
 }
 
 .status-pill--high {
-  background: rgba(187, 70, 70, 0.18);
-  border-color: rgba(187, 70, 70, 0.3);
-  color: #f0a4a4;
+  border-color: rgba(255, 62, 0, 0.36);
+  background: rgba(255, 62, 0, 0.16);
+  color: #ffb199;
 }
 
 .status-pill--medium {
-  background: rgba(188, 140, 58, 0.18);
-  border-color: rgba(188, 140, 58, 0.28);
-  color: #efd29e;
+  border-color: rgba(255, 154, 79, 0.34);
+  background: rgba(255, 154, 79, 0.14);
+  color: #ffd4b9;
 }
 
 .status-pill--low {
-  background: rgba(102, 142, 77, 0.18);
-  border-color: rgba(102, 142, 77, 0.28);
-  color: #bcd3a5;
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #1a1a1a;
+  color: #d6d6d0;
+}
+
+.alert-card__header span {
+  color: #ff7a4d;
+}
+
+.alert-card__header strong {
+  color: #f5f5f0;
+  font-size: 0.82rem;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fleet-row__meta {
+  justify-items: end;
+  gap: 8px;
+}
+
+.fleet-row__meta span {
+  color: #cfcfc9;
 }
 
 .checklist label {
@@ -378,40 +515,60 @@
   gap: 10px;
 }
 
+.empty-state h4 {
+  margin: 0;
+  color: #f5f5f0;
+  font-family: 'Rajdhani', sans-serif;
+  text-transform: uppercase;
+}
+
 .empty-state p {
   margin: 8px 0 0;
 }
 
-@media (max-width: 1080px) {
-  .app-shell,
-  .metrics,
-  .content-grid,
-  .content-grid--secondary {
-    grid-template-columns: 1fr;
+@media (max-width: 1180px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
-  .sidebar {
-    gap: 24px;
-    border-right: 0;
-    border-bottom: 1px solid rgba(181, 192, 120, 0.18);
+  .topbar__status {
+    justify-content: flex-start;
+  }
+
+  .metrics-grid,
+  .main-grid,
+  .split-grid,
+  .overview-panel {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 760px) {
   .dashboard {
     padding: 16px;
   }
 
-  .hero-panel,
-  .workflow-row,
+  .topbar {
+    padding: 14px 16px;
+  }
+
+  .topbar__nav {
+    width: 100%;
+  }
+
+  .mission-row,
   .task-row,
-  .card__heading,
-  .milestone-row__header,
-  .risk-row__header {
+  .fleet-row,
+  .panel__header,
+  .readiness-row__header,
+  .risk-row__header,
+  .alert-card__header {
     display: grid;
   }
 
-  .workflow-row dl {
+  .mission-row__stats {
     grid-template-columns: 1fr;
+    min-width: 0;
   }
 }
