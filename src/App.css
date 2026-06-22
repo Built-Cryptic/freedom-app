@@ -1,34 +1,55 @@
 .app-shell {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: 290px minmax(0, 1fr);
   min-height: 100vh;
 }
 
 .sidebar {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 32px 24px;
-  background: rgba(12, 17, 24, 0.92);
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 34px 24px;
+  background:
+    linear-gradient(180deg, rgba(18, 24, 18, 0.96), rgba(11, 15, 11, 0.98)),
+    repeating-linear-gradient(
+      180deg,
+      rgba(187, 198, 126, 0.04),
+      rgba(187, 198, 126, 0.04) 1px,
+      transparent 1px,
+      transparent 28px
+    );
+  border-right: 1px solid rgba(181, 192, 120, 0.18);
+}
+
+.sidebar::after {
+  content: '';
+  position: absolute;
+  inset: 16px 12px;
+  border: 1px solid rgba(181, 192, 120, 0.08);
+  pointer-events: none;
 }
 
 .sidebar h1,
 .hero-panel h2,
 .card h3,
 .workflow-row h4,
-.task-row h4 {
+.task-row h4,
+.milestone-row__header h4,
+.risk-row__header h4,
+.empty-state h4 {
   margin: 0;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  letter-spacing: 0.03em;
 }
 
 .sidebar__eyebrow,
 .eyebrow {
   margin: 0 0 10px;
-  color: #7fe8c8;
+  color: #b7c879;
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -46,14 +67,22 @@
 .workflow-row dt,
 .task-row p,
 .activity-list,
-.checklist label {
-  color: #a6b4c6;
+.checklist label,
+.summary-chip span,
+.milestone-row__header p,
+.risk-row p,
+.empty-state p {
+  color: #8f9983;
 }
 
 .sidebar__nav a {
-  padding: 12px 14px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.03);
+  padding: 13px 14px;
+  border: 1px solid rgba(181, 192, 120, 0.12);
+  border-radius: 8px;
+  background: rgba(181, 192, 120, 0.04);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
 }
 
 .sidebar__foot {
@@ -67,10 +96,30 @@
 
 .hero-panel,
 .card {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 28px;
-  background: rgba(15, 21, 31, 0.82);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+  position: relative;
+  border: 1px solid rgba(181, 192, 120, 0.16);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(16, 20, 14, 0.96), rgba(18, 24, 18, 0.86)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(181, 192, 120, 0.03),
+      rgba(181, 192, 120, 0.03) 1px,
+      transparent 1px,
+      transparent 26px
+    );
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.hero-panel::before,
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(181, 192, 120, 0.06);
+  clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
+  pointer-events: none;
 }
 
 .hero-panel {
@@ -78,36 +127,46 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
-  padding: 30px;
+  padding: 34px;
   background:
-    radial-gradient(circle at top right, rgba(127, 232, 200, 0.18), transparent 24%),
-    linear-gradient(180deg, rgba(14, 22, 33, 0.96), rgba(18, 26, 36, 0.92));
+    radial-gradient(circle at top right, rgba(191, 178, 70, 0.16), transparent 26%),
+    linear-gradient(180deg, rgba(19, 27, 17, 0.98), rgba(15, 19, 13, 0.94));
 }
 
 .hero-panel h2 {
-  max-width: 14ch;
-  font-size: clamp(2rem, 4vw, 3.7rem);
-  line-height: 0.98;
+  max-width: 13ch;
+  font-size: clamp(2.3rem, 4vw, 4.2rem);
+  line-height: 0.94;
+  text-transform: uppercase;
 }
 
 .hero-panel__text {
-  max-width: 64ch;
+  max-width: 66ch;
   line-height: 1.7;
 }
 
 .hero-panel__meta {
   display: grid;
   gap: 6px;
-  min-width: 140px;
+  min-width: 162px;
   padding: 18px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(191, 178, 70, 0.2);
+  border-radius: 12px;
+  background: rgba(191, 178, 70, 0.06);
   text-align: right;
+  text-transform: uppercase;
+}
+
+.hero-panel__meta strong,
+.metric-card strong,
+.summary-chip strong {
+  color: #e7d77a;
 }
 
 .hero-panel__meta strong,
 .metric-card strong {
-  font-size: 1.65rem;
+  font-size: 1.7rem;
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
 }
 
 .metrics,
@@ -122,11 +181,11 @@
 }
 
 .content-grid {
-  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.9fr);
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.92fr);
 }
 
 .content-grid--secondary {
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.82fr);
 }
 
 .card {
@@ -149,24 +208,31 @@
   min-height: 32px;
   padding: 0 12px;
   border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .badge {
-  background: rgba(127, 232, 200, 0.14);
-  color: #8df0d3;
+  background: rgba(183, 200, 121, 0.14);
+  border: 1px solid rgba(183, 200, 121, 0.18);
+  color: #d6dd9d;
 }
 
-.badge--soft {
-  background: rgba(255, 255, 255, 0.08);
-  color: #dce4ee;
+.badge--soft,
+.status-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #d7ddca;
 }
 
 .workflow-list,
 .task-list,
 .activity-list,
-.checklist {
+.checklist,
+.milestone-list,
+.risk-list {
   display: grid;
   gap: 14px;
 }
@@ -180,31 +246,40 @@
 }
 
 .summary-chip,
-.filter-chip {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
+.filter-chip,
+.workflow-row,
+.task-row,
+.milestone-row,
+.risk-row,
+.metric-card,
+.empty-state {
+  border: 1px solid rgba(181, 192, 120, 0.12);
+  border-radius: 12px;
+  background: rgba(181, 192, 120, 0.04);
+}
+
+.metric-card,
+.summary-chip,
+.milestone-row,
+.risk-row,
+.empty-state {
+  padding: 18px;
 }
 
 .summary-chip {
   display: grid;
   gap: 4px;
   min-width: 120px;
-  padding: 14px 16px;
-}
-
-.summary-chip span {
-  color: #a6b4c6;
-  font-size: 0.82rem;
 }
 
 .summary-chip strong {
-  font-size: 1.35rem;
+  font-size: 1.45rem;
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
 }
 
 .filter-chip {
   padding: 10px 14px;
-  color: #dce4ee;
+  color: #d7ddca;
   cursor: pointer;
   transition:
     border-color 0.2s ease,
@@ -214,14 +289,14 @@
 
 .filter-chip:hover,
 .filter-chip:focus-visible {
-  border-color: rgba(127, 232, 200, 0.34);
+  border-color: rgba(231, 215, 122, 0.36);
   transform: translateY(-1px);
 }
 
 .filter-chip--active {
-  background: rgba(127, 232, 200, 0.14);
-  border-color: rgba(127, 232, 200, 0.34);
-  color: #8df0d3;
+  background: rgba(231, 215, 122, 0.12);
+  border-color: rgba(231, 215, 122, 0.3);
+  color: #e7d77a;
 }
 
 .workflow-row,
@@ -231,13 +306,11 @@
   justify-content: space-between;
   gap: 18px;
   padding: 16px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .workflow-row dl {
   display: grid;
-  grid-template-columns: repeat(3, minmax(80px, 1fr));
+  grid-template-columns: repeat(3, minmax(82px, 1fr));
   gap: 12px;
   margin: 0;
 }
@@ -247,27 +320,10 @@
   margin: 0;
 }
 
-.status-pill {
-  background: rgba(255, 255, 255, 0.08);
-}
-
 .activity-list {
   margin: 0;
   padding-left: 18px;
-  line-height: 1.7;
-}
-
-.milestone-list,
-.risk-list {
-  display: grid;
-  gap: 16px;
-}
-
-.milestone-row,
-.risk-row {
-  padding: 18px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.04);
+  line-height: 1.8;
 }
 
 .milestone-row__header,
@@ -278,15 +334,9 @@
   gap: 16px;
 }
 
-.milestone-row__header h4,
-.risk-row__header h4 {
-  margin: 0;
-}
-
 .milestone-row__header p,
 .risk-row p {
   margin: 6px 0 0;
-  color: #a6b4c6;
 }
 
 .progress-bar {
@@ -301,22 +351,25 @@
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #7fe8c8, #4fb7ff);
+  background: linear-gradient(90deg, #c6bf68, #6a7f48);
 }
 
 .status-pill--high {
-  background: rgba(255, 107, 107, 0.16);
-  color: #ff9d9d;
+  background: rgba(187, 70, 70, 0.18);
+  border-color: rgba(187, 70, 70, 0.3);
+  color: #f0a4a4;
 }
 
 .status-pill--medium {
-  background: rgba(255, 194, 102, 0.16);
-  color: #ffd48f;
+  background: rgba(188, 140, 58, 0.18);
+  border-color: rgba(188, 140, 58, 0.28);
+  color: #efd29e;
 }
 
 .status-pill--low {
-  background: rgba(127, 232, 200, 0.14);
-  color: #8df0d3;
+  background: rgba(102, 142, 77, 0.18);
+  border-color: rgba(102, 142, 77, 0.28);
+  color: #bcd3a5;
 }
 
 .checklist label {
@@ -325,23 +378,11 @@
   gap: 10px;
 }
 
-.empty-state {
-  padding: 20px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.empty-state h4,
 .empty-state p {
-  margin: 0;
+  margin: 8px 0 0;
 }
 
-.empty-state p {
-  margin-top: 8px;
-  color: #a6b4c6;
-}
-
-@media (max-width: 1040px) {
+@media (max-width: 1080px) {
   .app-shell,
   .metrics,
   .content-grid,
@@ -352,7 +393,7 @@
   .sidebar {
     gap: 24px;
     border-right: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(181, 192, 120, 0.18);
   }
 }
 

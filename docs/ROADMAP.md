@@ -1,14 +1,14 @@
-# Freedom App Roadmap
+# Freedom Fleet App Roadmap
 
 ## Objective
 
-Deliver a frontend SaaS demo app that visibly supports a professional SDLC workflow for hiring review.
+Deliver a frontend UAV command dashboard that visibly supports a professional SDLC workflow for hiring review.
 
 ## Milestone 1
 
 - establish app shell and design system
-- build dashboard overview
-- add workflow and task surfaces
+- build command dashboard overview
+- add mission, operator, and telemetry surfaces
 - document branch and PR process
 - enable CI validation
 - prepare Vercel deployment
